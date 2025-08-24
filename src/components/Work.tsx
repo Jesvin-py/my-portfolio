@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ImageCarousel from './ImageCarousel';
+import aiDroneImage from '../images/ai-drone/drone-cover.jpg';
+import crimeSystemImage from '../images/crime-management/crime-system-cover.jpg';
 
 const Work: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,7 +36,9 @@ const Work: React.FC = () => {
       description: 'Advanced drone system with computer vision capabilities for autonomous navigation and real-time object detection using machine learning algorithms.',
       tech: ['Computer Vision', 'Machine Learning', 'ROS', 'Python', 'OpenCV'],
       link: '#',
-      github: '#'
+      github: '#',
+      image: aiDroneImage,
+      imageAlt: 'AI-Powered Autonomous Drone with advanced navigation systems'
     },
     {
       title: 'AIDLINK Disaster Response Platform',
@@ -56,7 +60,9 @@ const Work: React.FC = () => {
       description: 'Intelligent crime reporting and management platform with data analytics and automated case tracking for law enforcement agencies.',
       tech: ['Flask', 'MySQL', 'HTML/CSS', 'JavaScript', 'Bootstrap'],
       link: '#',
-      github: '#'
+      github: '#',
+      image: crimeSystemImage,
+      imageAlt: 'Smart Crime Management System with digital analytics dashboard'
     }
   ];
 
@@ -86,27 +92,45 @@ const Work: React.FC = () => {
               onMouseEnter={() => setHoveredProject(index)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/20 dark:border-gray-700/20 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+              <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/20 dark:border-gray-700/20 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group">
                 {/* Project Image/Icon */}
-                <div className="relative h-48 bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-400/20 dark:to-purple-400/20 flex items-center justify-center overflow-hidden">
+                <div className="relative h-48 overflow-hidden">
                   {/* Use ImageCarousel for AIDLINK project, icon for others */}
                   {project.title === 'AIDLINK Disaster Response Platform' && project.images ? (
                     <ImageCarousel images={project.images} interval={4000} />
+                  ) : project.image ? (
+                    <div className="relative w-full h-full">
+                      <img
+                        src={project.image}
+                        alt={project.imageAlt}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      {/* Gradient overlay for better text readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-300"></div>
+                      {/* Project icon overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-6xl group-hover:scale-110 transition-transform duration-500 drop-shadow-2xl opacity-90 group-hover:opacity-100">
+                          {project.icon}
+                        </div>
+                      </div>
+                    </div>
                   ) : (
-                    <div className="text-6xl group-hover:scale-110 transition-transform duration-500">
-                      {project.icon}
+                    <div className="relative h-full bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-400/20 dark:to-purple-400/20 flex items-center justify-center">
+                      <div className="text-6xl group-hover:scale-110 transition-transform duration-500">
+                        {project.icon}
+                      </div>
                     </div>
                   )}
                   
                   {/* Hover Overlay */}
-                  <div className={`absolute inset-0 bg-gradient-to-br from-blue-600/80 to-purple-600/80 flex items-center justify-center transition-all duration-300 ${
+                  <div className={`absolute inset-0 bg-gradient-to-br from-blue-600/90 to-purple-600/90 backdrop-blur-sm flex items-center justify-center transition-all duration-300 ${
                     hoveredProject === index ? 'opacity-100' : 'opacity-0'
                   }`}>
                     <div className="flex gap-4">
-                      <button className="px-4 py-2 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300">
+                      <button className="px-4 py-2 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg">
                         View Live
                       </button>
-                      <button className="px-4 py-2 bg-gray-800 text-white rounded-lg font-semibold hover:bg-gray-700 transition-colors duration-300">
+                      <button className="px-4 py-2 bg-gray-800 text-white rounded-lg font-semibold hover:bg-gray-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
                         GitHub
                       </button>
                     </div>
@@ -127,7 +151,7 @@ const Work: React.FC = () => {
                     {project.tech.map((tech) => (
                       <span 
                         key={tech}
-                        className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-full font-medium"
+                        className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-full font-medium transition-all duration-300 hover:bg-blue-200 dark:hover:bg-blue-800/40 hover:scale-105"
                       >
                         {tech}
                       </span>
