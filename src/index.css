@@ -1,3 +1,107 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 3D Transform utilities */
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .transform-style-preserve-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .rotate-y-12 {
+    transform: rotateY(12deg);
+  }
+  
+  .rotate-x-6 {
+    transform: rotateX(6deg);
+  }
+  
+  .translate-z-0 {
+    transform: translateZ(0px);
+  }
+  
+  .translate-z-\[-20px\] {
+    transform: translateZ(-20px);
+  }
+  
+  .scale-110 {
+    transform: scale(1.1);
+  }
+}
+
+/* Profile avatar styling */
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 10;
+}
+
+.avatar-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced 3D card hover effects */
+@media (hover: hover) {
+  .group:hover .transform-style-preserve-3d {
+    transform: rotateY(12deg) rotateX(6deg) translateZ(20px);
+  }
+}
+
+/* Mobile responsiveness for 3D effects */
+@media (max-width: 768px) {
+  .perspective-1000 {
+    perspective: 800px;
+  }
+  
+  .group:hover .transform-style-preserve-3d {
+    transform: rotateY(8deg) rotateX(4deg) translateZ(10px);
+  }
+  
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .avatar-text {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .perspective-1000 {
+    perspective: 600px;
+  }
+  
+  .group:hover .transform-style-preserve-3d {
+    transform: rotateY(6deg) rotateX(3deg) translateZ(5px);
+  }
+  
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .avatar-text {
+    font-size: 1.5rem;
+  }
+}

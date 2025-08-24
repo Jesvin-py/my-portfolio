@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Work from './components/Work';
+import profileImage from './images/profile.jpg';
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +23,18 @@ const App: React.FC = () => {
       document.documentElement.classList.add('dark');
     }
   }, []);
+
+  // Smooth scroll handler for navigation
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const target = document.querySelector(targetId);
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -79,12 +92,56 @@ const App: React.FC = () => {
               Crafting innovative digital solutions with cutting-edge technology
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+              <a 
+                href="#work"
+                onClick={(e) => handleSmoothScroll(e, '#work')}
+                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg text-center"
+              >
                 View My Work
-              </button>
-              <button className="px-8 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl text-gray-800 dark:text-white rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg border border-white/20 dark:border-gray-700/20">
+              </a>
+              <a 
+                href="#contact"
+                onClick={(e) => handleSmoothScroll(e, '#contact')}
+                className="px-8 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl text-gray-800 dark:text-white rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg border border-white/20 dark:border-gray-700/20 text-center"
+              >
                 Contact Me
-              </button>
+              </a>
+            </div>
+          </div>
+          
+          {/* 3D Profile Card */}
+          <div className="relative">
+            <div className="group perspective-1000">
+              <div className="relative w-80 h-96 transform-style-preserve-3d transition-all duration-500 group-hover:rotate-y-12 group-hover:rotate-x-6">
+                {/* Background Image Layer */}
+                <div 
+                  className="absolute inset-0 rounded-2xl bg-cover bg-center bg-no-repeat transform translate-z-[-20px] scale-110 opacity-30 group-hover:opacity-40 transition-opacity duration-500"
+                  style={{
+                    backgroundImage: `url(${profileImage})`,
+                    filter: 'blur(1px) brightness(0.7)',
+                  }}
+                ></div>
+                
+                {/* Glass overlay for better text readability */}
+                <div className="absolute inset-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-gray-700/20 shadow-2xl transform translate-z-0"></div>
+                
+                {/* Content Layer */}
+                <div className="relative z-10 p-8 text-center h-full flex flex-col justify-center">
+                  <div className="profile-avatar mb-6 mx-auto">
+                    <span className="avatar-text">JV</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+                    Jesvin Vincent
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    Computer Science & Engineering
+                  </p>
+                  <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-gray-400">
+                    <span className="text-lg">📍</span>
+                    <span>Thodupuzha</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           
@@ -189,7 +246,7 @@ const App: React.FC = () => {
                       </div>
                       <div>
                         <div className="font-semibold text-gray-800 dark:text-white">Location</div>
-                        <div className="text-gray-600 dark:text-gray-300">Chennai, India</div>
+                        <div className="text-gray-600 dark:text-gray-300">Thodupuzha, Kerala</div>
                       </div>
                     </div>
                   </div>
